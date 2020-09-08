@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
+  {/* we are rendering the output of that (which must be valid JSX code) to the browser, converting everything from JSX into code the browser can understand and interpret. */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')
