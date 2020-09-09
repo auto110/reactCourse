@@ -1,5 +1,5 @@
 // include the React library
-import React from 'react';
+import React, { Component } from 'react';
 
 //New Greeting component
 const Greeting = props => <p>Hello {props.name}!</p>;
@@ -21,6 +21,17 @@ const Greeting = props => <p>Hello {props.name}!</p>;
 // }
 
 //Declaring a functional component in React is incredibly simple since it is just a function declaration that returns some JSX.
-const App = () => <div>Hello React!</div>;
+// const App = () => <div>Hello React!</div>;
+
+class App extends Component{
+  render(){
+    return (
+      <div className = "App">
+        Test App
+      </div>
+    )
+  }
+}
+
 // export the component (named App）
 export default App;
