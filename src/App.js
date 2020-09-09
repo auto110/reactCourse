@@ -33,6 +33,8 @@ class App extends Component{
       email: '',
       errors: []
     };
+    // 当调用事件函数时，事件里的this指向的上下文环境会发生变化（指向的不是当前组件），需要在构造器中为事件初始化指向和绑定执行上下文为当前组件
+    this.validateUsernameOnBlur = this.validateUsernameOnBlur.bind(this)
   }
   
   submitForm(event){
@@ -42,6 +44,8 @@ class App extends Component{
 
   validateUsernameOnBlur(event){
     console.log("I should validate whatever is in ", event.target.value);
+    // 这里this需要显式绑定到组件，否则会出现 “this is undefined” 错误
+    this.setState()
   }
 
   displayForm() {
