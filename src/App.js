@@ -35,6 +35,11 @@ class App extends Component{
     };
   }
   
+  submitForm(event){
+    console.log("正在提交表单 ...")
+    console.log(event)
+  }
+
   displayForm() {
     return (
       <div>
@@ -43,7 +48,9 @@ class App extends Component{
         Password Confirmation: <input type="text" /><br />
         Email: <input type="text" /><br />
         <br />
-        <button>Submit</button>
+        {/* <button>Submit</button> */}
+        {/* We will call this click handler submitForm and reference it inside our component class since this will be an event handler local to this component. */}
+        <button onClick = {this.submitForm}>Submit</button>
       </div>
     );
   }
