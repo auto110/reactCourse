@@ -40,10 +40,14 @@ class App extends Component{
     console.log(event)
   }
 
+  validateUsernameOnBlur(event){
+    console.log("I should validate whatever is in ", event.target.value);
+  }
+
   displayForm() {
     return (
       <div>
-        Username: <input type="text" /><br />
+        Username: <input type="text" onBlur = {this.validateUsernameOnBlur} /><br />
         Password: <input type="text" /><br />
         Password Confirmation: <input type="text" /><br />
         Email: <input type="text" /><br />
