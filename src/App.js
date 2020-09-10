@@ -32,13 +32,15 @@ class App extends Component{
       password: '',
       passwordConfirmation: '',
       email: '',
-      errors: []
+      errors: [],
+      showSecret: false
     };
     // 当调用事件函数时，事件里的this指向的上下文环境会发生变化（指向的不是当前组件），需要在构造器中为事件初始化指向和绑定执行上下文为当前组件
     this.validateUsernameOnBlur = this.validateUsernameOnBlur.bind(this)
     this.validatePasswordOnBlur = this.validatePasswordOnBlur.bind(this);
     this.validatePasswordConfirmationOnBlur = this.validatePasswordConfirmationOnBlur.bind(this);
     this.validateEmailOnBlur = this.validateEmailOnBlur.bind(this);
+    this.toggleSecretMessage = this.toggleSecretMessage.bind(this)
   }
   
   submitForm(event){
@@ -140,6 +142,27 @@ class App extends Component{
       return null;
     }
   }
+
+  secretMessage(){
+    // quick conditional that checks the state for showSecret
+    if(!this.state.showSecret){
+      return;
+    }
+
+    return (
+      <div className="secret-message">
+       I am the secret message!
+      </div>
+    )
+  }
+
+  // add a new function called toggleSecretMessage() to start modifying the state
+  // We will want to call this function from our button since that will act as the trigger to show and hide the secret message.
+  toggleSecretMessage(){
+    this.setState({
+      showSecret: !this.state.showSecret
+    })
+  }
   
   render(){
     const showMessage = true;
@@ -150,10 +173,13 @@ class App extends Component{
         <hr/>
         {this.displayForm()}
 
-        <button>点击该按钮显示剩余内容！</button>
-        <div>
+        <button onClick = {this.toggleSecretMessage}>点击该按钮显示剩余内容！</button>
+        {this.secretMessage()}
+
+        {/* <div>
         I am the content that should be hidden by default!
-        </div>
+        </div> */}
+
         {this.renderMessage(showMessage)}
       </div>
     )
