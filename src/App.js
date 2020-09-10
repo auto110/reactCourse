@@ -33,7 +33,35 @@ class App extends Component{
       passwordConfirmation: '',
       email: '',
       errors: [],
-      showSecret: false
+
+      showSecret: false,
+
+      questions: [
+        {
+          question: "What animal barks?",
+          possibleAnswers: ["Dog", "Cat"],
+          rightAnswer: "Dog",
+          playerChoice: null
+        },
+        {
+          question: "What animal is more closely related to a tiger?",
+          possibleAnswers: ["Dog", "Cat"],
+          rightAnswer: "Cat",
+          playerChoice: null
+        },
+        {
+          question: "What animal is more closely related to a wolf?",
+          possibleAnswers: ["Dog", "Cat"],
+          rightAnswer: "Dog",
+          playerChoice: null
+        },
+        {
+          question: "What animal is best known for playing fetch?",
+          possibleAnswers: ["Dog", "Cat"],
+          rightAnswer: "Dog",
+          playerChoice: null
+        }
+      ]
     };
     // 当调用事件函数时，事件里的this指向的上下文环境会发生变化（指向的不是当前组件），需要在构造器中为事件初始化指向和绑定执行上下文为当前组件
     this.validateUsernameOnBlur = this.validateUsernameOnBlur.bind(this)
@@ -163,6 +191,31 @@ class App extends Component{
       showSecret: !this.state.showSecret
     })
   }
+
+  displayQuestion(index){
+    const question = this.state.questions[index];
+    return (
+      <div className="question-display">
+       <p className="question">
+        {question.question}
+       </p>
+       <button className="question-choice">
+         {question.possibleAnswers[0]}
+       </button>
+       <button className="question-choice">
+         {question.possibleAnswers[1]}
+       </button>
+       <br/>
+
+       <p className="result-correct">
+        答案正确！
+       </p>
+       <p className="result-incorrect">
+         答案错误！
+       </p>
+      </div>
+    ) 
+  }
   
   render(){
     const showMessage = true;
@@ -181,6 +234,15 @@ class App extends Component{
         </div> */}
 
         {this.renderMessage(showMessage)}
+    
+      <br/>
+      <h1>问答测试</h1>
+      <br/>
+
+      { this.displayQuestion(0) }
+      { this.displayQuestion(1) }
+      { this.displayQuestion(2) }
+      { this.displayQuestion(3) }
       </div>
     )
   }
