@@ -132,14 +132,29 @@ class App extends Component{
       </div>
     );
   }
+
+  renderMessage(show){
+    if(show){
+      return <p>Hello World</p>
+    }else{
+      return null;
+    }
+  }
   
   render(){
+    const showMessage = true;
     return (
       <div className = "App">
         Create Account 
         {this.displayErrors()}
         <hr/>
         {this.displayForm()}
+
+        <button>点击该按钮显示剩余内容！</button>
+        <div>
+        I am the content that should be hidden by default!
+        </div>
+        {this.renderMessage(showMessage)}
       </div>
     )
   }
