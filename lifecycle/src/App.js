@@ -13,7 +13,8 @@ class App extends Component{
     console.log("Constructor");
     this.state = {
       // start with a value of 0.
-      cycle: 0
+      cycle: 0,
+      messages: []
     };
     setInterval(() => {
       this.setState({cycle: this.state.cycle + 1})
@@ -30,6 +31,31 @@ class App extends Component{
     console.log("Component Did Update");
   }
 
+  renderProfile(){
+    if(this.state.messages && this.state.messages.length>0){
+      return (
+          this.state.messages.map(
+            (msg, index)=> <li key={`msg-${index}`}> {msg} </li>
+          )
+      );
+    }else{
+      return (<div>No messages!</div>)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    console.log('prevProps:', prevProps);
+    console.log('prevState:', prevState);
+  }
+
+  // simulate a long-loading profile
+  componentDidMount(){
+    setTimeout(
+      ()=> this.setState({messages: ["Hello World", "How are you?"]}),
+      10000  //10 seconds
+    )
+  }
+
   render(){
     console.log("Render")
     return (
@@ -37,6 +63,7 @@ class App extends Component{
       <div className="App">react生命周期: Cycle {this.state.cycle}
       {/*  conditional rendering */}
       { false && <LifecycleTest /> }
+      {this.renderProfile()}
       </div>
     )
   }
