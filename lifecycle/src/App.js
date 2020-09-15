@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import LifecycleTest from "./LifecycleTest";
+import Message from './Message';
 
 // The mount lifecycle is called twice: before and immediately after React renders the component into DOM.
 // Mounting is where a lot of the functionality will take place specific to initializing a component's state at the time of loading. Mounting happens when your app loads up for the first time, when you navigate to a particular component using something like React router, or it could be something like when you add a component to a page dynamically, like through conditional renders or loops. The first one of these functionalities is one you should be very comfortable with at this point: the constructor.
@@ -15,21 +16,19 @@ class App extends Component{
       // start with a value of 0.
       cycle: 0,
       messages: [],
-      loading: true
+      loading: true,
+      list: [
+        { id: 1, message: 'Hello' },
+        { id: 2, message: 'Everyone' },
+        { id: 3, message: 'What' },
+        { id: 4, message: 'Is' },
+        { id: 5, message: 'Up' }
+      ]
     };
     setInterval(() => {
       this.setState({cycle: this.state.cycle + 1})
     }, 1000);
-  }
-
-  // 在第一次渲染后调用
-  componentDidMount(){
-    console.log("Component Did Mount");
-  }
-
-  // this.state更新时该函数被触发
-  componentDidUpdate(){
-    console.log("Component Did Update");
+    this.removeItem = this.removeItem.bind(this)
   }
 
   renderProfile(){
@@ -49,17 +48,38 @@ class App extends Component{
   }
 
   componentDidUpdate(prevProps, prevState){
+    console.log("Component Did Update");
     console.log('prevProps:', prevProps);
     console.log('prevState:', prevState);
   }
 
   // simulate a long-loading profile
   componentDidMount(){
+    console.log("Component Did Mount");
     setTimeout(
       ()=> this.setState({ messages: ["Hello World", "How are you?"], loading: false}),
       10000  //10 seconds
     )
   }
+
+  componentWillUnmount(){
+    alert("I've been removed!");
+    console.log('Removing item', this.props);
+  }
+
+  removeItem(id){
+    const newList = this.state.list.filter(item => item.id !== id);
+    this.setState({ list: newList });
+    this.state.list.map(item=>(
+      <Message 
+        key = {item.id}
+        id = {item.id}
+        message = {item.message}
+        removeItem = {this.removeItem.bind(this)}
+      />
+    ))
+  }
+
 
   render(){
     console.log("Render")
@@ -69,6 +89,11 @@ class App extends Component{
       {/*  conditional rendering */}
       { false && <LifecycleTest /> }
       {this.renderProfile()}
+
+      <h1>My Items</h1>
+      { this.state.list.map(item=>(
+        <Message key={item.id}  id = {item.id} message={item.message}/>
+        ))}
       </div>
     )
   }
