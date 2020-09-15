@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import LifecycleTest from "./LifecycleTest";
 
 // The mount lifecycle is called twice: before and immediately after React renders the component into DOM.
 // Mounting is where a lot of the functionality will take place specific to initializing a component's state at the time of loading. Mounting happens when your app loads up for the first time, when you navigate to a particular component using something like React router, or it could be something like when you add a component to a page dynamically, like through conditional renders or loops. The first one of these functionalities is one you should be very comfortable with at this point: the constructor.
@@ -10,9 +11,12 @@ class App extends Component{
   constructor(props){
     super(props);
     console.log("Constructor");
-    this.state = {cycle: 0};
+    this.state = {
+      // start with a value of 0.
+      cycle: 0
+    };
     setInterval(() => {
-      this.setState({cycle: this.state.cycle +1})
+      this.setState({cycle: this.state.cycle + 1})
     }, 1000);
   }
 
@@ -29,7 +33,11 @@ class App extends Component{
   render(){
     console.log("Render")
     return (
-      <div className="App">react生命周期: Cycle {this.state.cycle}</div>
+      // show the current value of the cycle state
+      <div className="App">react生命周期: Cycle {this.state.cycle}
+      {/*  conditional rendering */}
+      { false && <LifecycleTest /> }
+      </div>
     )
   }
 }
