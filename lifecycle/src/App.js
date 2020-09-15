@@ -14,7 +14,8 @@ class App extends Component{
     this.state = {
       // start with a value of 0.
       cycle: 0,
-      messages: []
+      messages: [],
+      loading: true
     };
     setInterval(() => {
       this.setState({cycle: this.state.cycle + 1})
@@ -32,6 +33,10 @@ class App extends Component{
   }
 
   renderProfile(){
+    if(this.state.loading){
+      return (<div>Loading ....</div>)
+    }
+
     if(this.state.messages && this.state.messages.length>0){
       return (
           this.state.messages.map(
@@ -51,7 +56,7 @@ class App extends Component{
   // simulate a long-loading profile
   componentDidMount(){
     setTimeout(
-      ()=> this.setState({messages: ["Hello World", "How are you?"]}),
+      ()=> this.setState({ messages: ["Hello World", "How are you?"], loading: false}),
       10000  //10 seconds
     )
   }
