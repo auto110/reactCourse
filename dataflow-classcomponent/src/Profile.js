@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./profile.css"
 
 // Create a file named Profile.js and add a class component that returns some JSX in the render function
 
