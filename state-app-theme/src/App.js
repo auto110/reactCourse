@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import HelloMessage from "./HelloMessage"
 
 class App extends Component{
   constructor(props){
@@ -118,6 +119,10 @@ class App extends Component{
           </footer>
         </div>
 
+        <div>
+          <HelloMessage name="John" />
+        </div>
+      </div>
     );
   }
 }
