@@ -7,11 +7,20 @@ class App extends Component{
     this.state = {
       // define the value for the theme in the state of the component, the value of which can be used to change the css class of the div wrapper element. Initialize state with the value for theme set to light
       theme: "light"
-    }
+    };
+    // To access the class object using this keyword, we will need to bind it to the method
+    this.toggleTheme = this.toggleTheme.bind(this)
+  }
+
+  // Change the theme based on user interaction. 
+  toggleTheme(){
+    const theme = this.state.theme === "light" ? "dark": "light";
+    this.setState({theme})
   }
 
   render() {
     return (
+      // With the value of theme set to light, the div gets the class name light-theme
       <div className={`${this.state.theme}-theme`}>
         <div className="jumbotron">
           <div className="container">
@@ -23,6 +32,7 @@ class App extends Component{
               something more unique.
             </p>
             <p>
+            {/* Bind the toggleTheme function to the onClick event.  */}
               <button
                 className="btn btn-primary btn-lg"
                 onClick={this.toggleTheme}
@@ -107,7 +117,7 @@ class App extends Component{
             <p>&copy; 2016 Company, Inc.</p>
           </footer>
         </div>
-      </div>
+
     );
   }
 }
