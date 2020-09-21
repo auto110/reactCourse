@@ -1,6 +1,7 @@
 // include the React library
 import React, { Component } from 'react';
 import "./App.css";
+import MyForm from './FormDemo';
 
 //New Greeting component
 const Greeting = props => <p>Hello {props.name}!</p>;
@@ -278,6 +279,8 @@ class App extends Component{
 
       <hr/>
       {this.renderQuestions()}
+
+      <MyForm></MyForm>
       </div>
     )
   }
