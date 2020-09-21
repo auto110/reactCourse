@@ -1,5 +1,8 @@
 {
   "name": "weatherapp",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "axios": "^0.20.0"
+  }
 }
