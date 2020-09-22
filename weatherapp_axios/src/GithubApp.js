@@ -30,9 +30,9 @@ function GithubApp(){
             <div className="App">
                 <input type="text" onChange={handleChange} />
                 <button onClick={fetchData} value={keyword} >fetch</button>
-                <table>
+                {/* <table>
                     <tbody>{tableRows}</tbody>
-                </table>
+                </table> */}
             </div>
         )
     };
